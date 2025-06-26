@@ -40,7 +40,7 @@ class ContactsController < ApplicationController
   # DELETE /contacts
   def destroy_all
     Contact.destroy_all
-    render json: {}
+    render json: { message: "All contacts deleted" }
   end
 
 
