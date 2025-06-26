@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  phoneNumber: MyString
+  email: MyString
+  linkedId: 1
+  linkPrecedence: MyString
+  createdAt: 2025-06-26 13:58:27
+  updatedAt: 2025-06-26 13:58:27
+  deletedAt: 2025-06-26 13:58:27
+
+two:
+  phoneNumber: MyString
+  email: MyString
+  linkedId: 1
+  linkPrecedence: MyString
+  createdAt: 2025-06-26 13:58:27
+  updatedAt: 2025-06-26 13:58:27
+  deletedAt: 2025-06-26 13:58:27
