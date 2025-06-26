@@ -1,11 +1,12 @@
 class Contact < ApplicationRecord
-  enum linkPrecedence: { primary: "primary", secondary: "secondary" }
+  enum :linkPrecedence, { primary: "primary", secondary: "secondary" }, suffix: true
 
   def self.identify_or_create(email:, phone:)
     matching_contacts = find_matching_contacts(email, phone)
 
     if matching_contacts.empty?
       return [create_primary(email,phone)]
+    end
 
     all_contacts = fetch_all_linked_contacts(matching_contacts)
     primary_contact = resolve_primary_contact(all_contacts)
@@ -17,12 +18,12 @@ class Contact < ApplicationRecord
 
 
   def self.find_matching_contacts(email, phone)
-    Contact.where("email = ? OR phoneNumber = ?", email, phoneNumber)
+    Contact.where("email = ? OR phoneNumber = ?", email, phone)
   end
 
 
   def self.create_primary(email, phone)
-    Contact.where(email: email, phoneNumber: phone, linkPrecedence: :primary)
+    Contact.create!(email: email, phoneNumber: phone, linkPrecedence: :primary)
   end
 
 
@@ -32,7 +33,7 @@ class Contact < ApplicationRecord
   end
 
   def self.resolve_primary_contact(contacts)
-    primaries = contacts.select(&:primary?)
+    primaries = contacts.select(&:primary_linkPrecedence?)
     primary = primaries.min_by(&:created_at)
 
     (primaries - [primary]).each do |c|
