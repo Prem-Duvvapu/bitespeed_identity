@@ -1,6 +1,7 @@
 class ContactsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  # POST /identify
   def identify
     email = params[:email]
     phone = params[:phoneNumber]
@@ -9,32 +10,37 @@ class ContactsController < ApplicationController
     render json: format_response(contacts)
   end
 
+  # GET /contacts/:id
   def index
     contacts = Contact.all
     render json: contacts
   end
 
+  # GET /contacts
   def show
     contact = Contact.find_by(id: params[:id])
     if contact
       render json: contact
     else
       render json: { error: "Contact not found" }, status: :not_found
+    end
   end
 
+  # DELETE /contacts/:id
   def destroy
-    if params[:id]
-      contact = Contact.find_by(id: params[:id])
-      if contact
-        contact.destroy
-        render json: { message: "Contact deleted"}
-      else
-        render json: { error: "Contact not found"}, status: :not_found
-      end
+    contact = Contact.find_by(id: params[:id])
+    if contact
+      contact.destroy
+      render json: { message: "Contact deleted"}
     else
-      Contact.delete_all
-      render json: { message: "All contacts deleted"}
+      render json: { error: "Contact not found"}, status: :not_found
     end
+  end
+
+  # DELETE /contacts
+  def destroy_all
+    Contact.destroy_all
+    render json: {}
   end
 
 

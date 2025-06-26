@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   post "/identify", to: 'contacts#identify'
 
   resources :contacts, only: [:index, :show, :destroy]
+
+  delete "/contacts", to: "contacts#destroy_all"
 end
