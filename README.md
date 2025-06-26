@@ -2,6 +2,8 @@
 
 This is the backend implementation for the [Bitespeed Identity Reconciliation Task](https://bitespeed.notion.site/Bitespeed-Backend-Task-Identity-Reconciliation-1fb21bb2a930802eb896d4409460375c) — built to identify and consolidate user identities across multiple purchases based on contact details (email and/or phone number).
 
+Live API: **https://bitespeed-backend-task-identity-wubg.onrender.com**
+
 ---
 
 ## 🚀 Tech Stack
